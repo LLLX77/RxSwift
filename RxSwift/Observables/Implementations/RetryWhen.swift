@@ -56,7 +56,7 @@ class RetryWhenSequenceSink<S: SequenceType, O: ObserverType, RetryTriggerType, 
         super.init(observer: observer, cancel: cancel)
     }
     
-    override func on(event: Event<Element>) {
+    override func on(event: Event<E>) {
         switch event {
         case .Next:
             observer?.on(event)
@@ -93,7 +93,7 @@ class RetryWhenSequenceSink<S: SequenceType, O: ObserverType, RetryTriggerType, 
         super.dispose()
     }
     
-    override func extract(observable: Observable<Element>) -> S.Generator? {
+    override func extract(observable: Observable<E>) -> S.Generator? {
         if let onError = observable as? RetryWhenSequence<S, RetryTriggerType, Error> {
             return onError.sources.generate()
         }
