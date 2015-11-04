@@ -15,9 +15,9 @@ There are two main operators that work with schedulers. `observeOn` and `subscri
 If you want to perform work on different scheduler just use `observeOn(scheduler)` operator.
 如果需要在不同的调度器中执行工作，使用 `observeOn(scheduler)` 操作符。
 You would usually use `observeOn` a lot more often then `subscribeOn`.
-
+通常情况下更多的是使用 `observeOn`，较少使用 `subscribeOn`.
 In case `observeOn` isn't explicitly specified, work will be performed on which ever thread/scheduler elements are generated.
-
+如果 `observeOn` 没有特别明确的指定调度器，那么就是默认在创建调度器的线程中执行。
 Example of using `observeOn` operator
 
 ```
@@ -33,15 +33,15 @@ sequence1
 ```
 
 If you want to start sequence generation (`subscribe` method) and call dispose on a specific scheduler, use `subscribeOn(scheduler)`.
-
+如果需要通过 `subscribe` 方法来开始一个序列并且需要在一个指定的调度器中调用 dispose 对象，使用方法 `subscribeOn(scheduler)`.
 In case `subscribeOn` isn't explicitly specified, `subscribe` method will be called on the same thread/scheduler that `subscribeNext` or `subscribe` is called.
-
+如果没有特别明确的指定调度器，`subscribe`方法会在调用 `subscribeNext` or `subscribe` 的线程中执行。
 In case `subscribeOn` isn't explicitly specified, `dispose` method will be called on the same thread/scheduler that initiated disposing.
-
+如果没有特别明确的指定调度器，`dispose` 方法会在初始化 disposing 相同的线程中进行处理。
 In short, if no explicit scheduler is chosen, those methods will be called on current thread/scheduler.
-
+也就是说，如果没有明确指定调度器，这些方法都会在当前的线程以及使用默认的调度器。
 # Serial vs Concurrent Schedulers
-
+连续调度器和并发调度器
 Since schedulers can really be anything, and all operators that transform sequences need to preserve additional [implicit guarantees](GettingStarted.md#implicit-observable-guarantees), it is important what kind of schedulers are you creating.
 
 In case scheduler is concurrent, Rx's `observeOn` and `subscribeOn` operators will make sure everything works perfect.
