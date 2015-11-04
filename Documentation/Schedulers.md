@@ -1,4 +1,5 @@
 Schedulers
+调度器
 ==========
 
 1. [Serial vs Concurrent Schedulers](#serial-vs-concurrent-schedulers)
@@ -6,13 +7,13 @@ Schedulers
 1. [Builtin schedulers](#builtin-schedulers)
 
 Schedulers abstract away mechanism for performing work.
-
+调度器是抽象于 mechanism ，用于进行工作的一个概念。
 Different mechanisms for performing work include, current thread, dispatch queues, operation queues, new threads, thread pools, run loops ...
-
+用于执行工作的不同 mechanism 包括有：当前线程，派遣队列，操作队列，新线程，线程池，运行循环等等。
 There are two main operators that work with schedulers. `observeOn` and `subscribeOn`.
-
+和调度器一起使用的操作符主要有两个： `observeOn` 和 `subscribeOn`.
 If you want to perform work on different scheduler just use `observeOn(scheduler)` operator.
-
+如果需要在不同的调度器中执行工作，使用 `observeOn(scheduler)` 操作符。
 You would usually use `observeOn` a lot more often then `subscribeOn`.
 
 In case `observeOn` isn't explicitly specified, work will be performed on which ever thread/scheduler elements are generated.
